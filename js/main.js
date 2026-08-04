@@ -1,33 +1,54 @@
 async function loadStatus() {
 
-    const response = await fetch("data/status.json");
-    const data = await response.json();
+    try {
 
-    const container = document.getElementById("status-container");
+        const response = await fetch("data/status.json");
 
-    container.innerHTML = "";
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
 
-    data.services.forEach(service => {
+        const data = await response.json();
 
-        const card = document.createElement("div");
-        card.className = "card";
+        const container = document.getElementById("status-container");
+        container.innerHTML = "";
 
-        const statusText = service.status;
-        const statusClass = service.status;
+        data.services.forEach(service => {
 
-        card.innerHTML = `
-            <h2>${service.name}</h2>
-            <p class="${statusClass}">
-                ${statusText}
-            </p>
+            const card = document.createElement("div");
+            card.className = "card";
+
+            card.innerHTML = `
+                <h2>${service.name}</h2>
+
+                <p class="${service.status}">
+                    ${service.status.toUpperCase()}
+                </p>
+
+                <small>${service.message}</small>
+            `;
+
+            container.appendChild(card);
+
+        });
+
+        document.getElementById("generated_at").textContent =
+            `Last Updated : ${data.generated_at}`;
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        document.getElementById("status-container").innerHTML = `
+            <div class="card">
+                <h2>Error</h2>
+                <p class="offline">Unable to load status.</p>
+            </div>
         `;
 
-        container.appendChild(card);
+    }
 
-    });
-
-    document.getElementById("last-updated").textContent =
-        "Last Updated : " + data.last_updated;
 }
 
 loadStatus();
