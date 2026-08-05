@@ -1,12 +1,17 @@
 {
   "schema_version": 1,
+<<<<<<< HEAD
   "generated_at": "2026-08-04T23:55:00+05:30",
+=======
+  "generated_at": "2026-08-05T11:02:40Z",
+>>>>>>> c9761f3 (Update Cadence status)
   "monitor": {
     "name": "Cadence Status Monitor",
     "host": "Lab Monitor"
   },
   "services": [
     {
+<<<<<<< HEAD
       "id": "ssh",
       "name": "SSH",
       "status": "online",
@@ -29,3 +34,13 @@
     }
   ]
 }
+=======
+      "id": "virtuoso",
+      "name": "Virtuoso",
+      "status": "offline",
+      "message": "Timed out waiting for menu entry 'Cadence'. Last output: \u001b[3J\u001b[H\u001b[2J ....... Tool.............No Cadence_________________: 1 Vivado2023.2____________: 2 Synopsys________________: 3 Siemense (Mentor)_______: 4 For SSH loging use command ssh -X username@172.21.129.17 Welcome to EDA Tools Suite For Local machine utilization Enter no. for the desired tool-- \u001b]0;u24ev057@server3:src\u0007[u24ev057@server3 src]$",
+      "last_success": null
+    }
+  ]
+}
+>>>>>>> c9761f3 (Update Cadence status)
