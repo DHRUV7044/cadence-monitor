@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-06T10:29:35+05:30",
+  "generated_at": "2026-08-06T10:31:04+05:30",
   "monitor": {
     "name": "Cadence Status Monitor",
     "host": "Lab Monitor"
@@ -9,8 +9,8 @@
     {
       "id": "virtuoso",
       "name": "Virtuoso",
-      "status": "online",
-      "message": "Virtuoso license confirmed in /home/u24ev057/CDS.log: Virtuoso Framework License (111) was checked out successfully",
+      "status": "offline",
+      "message": "Timed out waiting for Virtuoso license confirmation",
       "last_success": "2026-08-06T10:29:35+05:30"
     }
   ]
