@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cadence Status Monitor - Live diagnostics and uptime status for the Cadence laboratory services.">
-    <title>Cadence Status Monitor | Diagnostics</title>
+    <meta name="description" content="Cadence Laboratory Diagnostics Workstation. Real-time telemetry, logic simulation, and status feeds.">
+    <title>Cadence Status Monitor | Workstation</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -19,90 +19,249 @@
 </head>
 <body>
 
-    <!-- Background Elements -->
-    <div class="monitor-background">
+    <!-- Background Grid -->
+    <div class="workstation-bg">
         <div class="grid-overlay"></div>
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
     </div>
 
-    <!-- Main Container -->
+    <!-- Workstation Container -->
     <div class="container">
 
-        <header>
-            <div class="header-nav">
-                <a href="https://dhruv7044.github.io/" class="back-link">
-                    <i data-lucide="arrow-left"></i>
-                    <span>Hub Home</span>
-                </a>
-                <div class="badge">
-                    <span class="badge-dot"></span>
-                    <span>Live Monitoring</span>
+        <!-- Top Panel / Header -->
+        <header class="panel-header header-workstation">
+            <div class="header-logo-section">
+                <i data-lucide="cpu" class="icon-brand"></i>
+                <div class="brand-text">
+                    <h1>Cadence Monitor</h1>
+                    <span class="sub-brand">EDA Diagnostic Workstation v2.0</span>
                 </div>
             </div>
             
-            <div class="title-area">
-                <div class="monitor-icon-wrapper">
-                    <i data-lucide="activity" class="monitor-icon"></i>
+            <div class="header-status-section">
+                <div class="status-metric">
+                    <span class="metric-lbl">System Link</span>
+                    <div class="status-indicator">
+                        <span class="indicator-dot blinking"></span>
+                        <span class="indicator-txt font-mono">ONLINE</span>
+                    </div>
                 </div>
-                <h1>Cadence Status Monitor</h1>
-                <p class="subtitle">Real-time health diagnostic dashboard for Cadence laboratory services</p>
+                <div class="status-metric">
+                    <span class="metric-lbl">Uptime</span>
+                    <span class="metric-val font-mono">14d:08h:32m</span>
+                </div>
+                <div class="status-actions">
+                    <button class="btn-refresh" id="btnRefresh" title="Force Telemetry Poll">
+                        <i data-lucide="refresh-cw" id="refreshIcon"></i>
+                        <span>Poll</span>
+                    </button>
+                    <a href="https://dhruv7044.github.io/" class="btn-hub" title="Go to Home Hub">
+                        <i data-lucide="home"></i>
+                    </a>
+                </div>
             </div>
         </header>
 
-        <main>
-            <!-- Services Status Grid -->
-            <section class="monitor-section">
-                <h2>Service Nodes</h2>
-                <div class="underline"></div>
-                <div id="status-container" class="status-grid">
-                    <!-- Loaded dynamically via js/main.js -->
-                    <div class="loading-state">
-                        <i data-lucide="refresh-cw" class="spinner"></i>
-                        <p>Polling node status...</p>
+        <!-- Main Workspace -->
+        <div class="workspace-grid">
+            
+            <!-- Left Workspace (65%): Node telemetry and logic analyzer -->
+            <div class="main-workspace">
+                
+                <!-- Telemetry Nodes list -->
+                <section class="ws-panel telemetry-panel">
+                    <div class="panel-title-bar">
+                        <div class="title-left">
+                            <i data-lucide="activity" class="panel-title-icon"></i>
+                            <h2>Service Telemetry Nodes</h2>
+                        </div>
+                        <span class="panel-title-badge font-mono" id="nodeCount">2 Nodes</span>
                     </div>
-                </div>
-            </section>
+                    
+                    <div class="panel-content table-responsive">
+                        <table class="telemetry-table">
+                            <thead>
+                                <tr>
+                                    <th>NODE ID</th>
+                                    <th>SERVICE NAME</th>
+                                    <th>DIAGNOSTIC STATUS</th>
+                                    <th>MESSAGE FEED</th>
+                                    <th class="text-right">CHECK TIME</th>
+                                </tr>
+                            </thead>
+                            <tbody id="telemetry-rows">
+                                <!-- Loaded dynamically via js/main.js -->
+                                <tr>
+                                    <td colspan="5" class="table-loading">
+                                        <i data-lucide="loader-2" class="spinner"></i>
+                                        <span>Polling network nodes...</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
 
-            <!-- Uptime Diagnostic Information (Static Console Elements) -->
-            <section class="diagnostic-panel">
-                <div class="panel-header">
-                    <i data-lucide="terminal" class="panel-icon"></i>
-                    <h3>Diagnostics Log & System Specs</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="metric-grid">
-                        <div class="metric-card">
-                            <span class="metric-label">Network Health</span>
-                            <span class="metric-value text-online">Optimal</span>
+                <!-- Waveform Logic Analyzer -->
+                <section class="ws-panel analyzer-panel">
+                    <div class="panel-title-bar">
+                        <div class="title-left">
+                            <i data-lucide="binary" class="panel-title-icon"></i>
+                            <h2>Logic Analyzer Waveform</h2>
                         </div>
-                        <div class="metric-card">
-                            <span class="metric-label">Avg. Latency</span>
-                            <span class="metric-value">12 ms</span>
+                        <span class="panel-title-badge font-mono">CLK: 50.00 MHz</span>
+                    </div>
+                    
+                    <div class="panel-content waveform-container">
+                        <div class="waveform-labels font-mono">
+                            <div class="wf-label">CLK</div>
+                            <div class="wf-label">EN</div>
+                            <div class="wf-label">DATA</div>
                         </div>
-                        <div class="metric-card">
-                            <span class="metric-label">Active Users</span>
-                            <span class="metric-value">4 Session(s)</span>
-                        </div>
-                        <div class="metric-card">
-                            <span class="metric-label">Lab Server Host</span>
-                            <span class="metric-value">lab-master-1</span>
+                        <div class="canvas-wrapper">
+                            <canvas id="waveformCanvas" width="560" height="150"></canvas>
                         </div>
                     </div>
-                    <div class="console-box">
-                        <p class="console-line"><span class="console-time">[00:01:04]</span> System diagnostics initialized.</p>
-                        <p class="console-line"><span class="console-time">[00:01:05]</span> Established SSH tunnels on port 22.</p>
-                        <p class="console-line"><span class="console-time">[00:01:05]</span> Checked Cadence License daemon port 27000... success.</p>
-                        <p class="console-line"><span class="console-time">[00:01:06]</span> Polling Virtuoso application server nodes... all OK.</p>
-                    </div>
-                </div>
-            </section>
-        </main>
+                </section>
 
-        <footer>
-            <div class="footer-content">
-                <p id="generated_at">Last Updated : --/--/---- --:--:--</p>
-                <p class="copyright">&copy; 2026 Dhruv Shingala. All rights reserved.</p>
+            </div>
+
+            <!-- Right Workspace (35%): Diagnostic Parameters and stats -->
+            <aside class="side-workspace">
+                
+                <!-- Environment parameters -->
+                <section class="ws-panel environment-panel">
+                    <div class="panel-title-bar">
+                        <div class="title-left">
+                            <i data-lucide="settings-2" class="panel-title-icon"></i>
+                            <h2>Environment Specs</h2>
+                        </div>
+                    </div>
+                    <div class="panel-content specs-grid">
+                        <div class="spec-row">
+                            <span class="spec-label">Server Host</span>
+                            <span class="spec-value font-mono">lab-master-1</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Core Host IP</span>
+                            <span class="spec-value font-mono">192.168.10.15</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">OS Kernel</span>
+                            <span class="spec-value font-mono">Ubuntu 22.04 LTS</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">CPU Load</span>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 8.5%"></div>
+                                <span class="progress-label font-mono">8.5%</span>
+                            </div>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">DRAM Memory</span>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 32.1%"></div>
+                                <span class="progress-label font-mono">32.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Licensing Stats -->
+                <section class="ws-panel license-panel">
+                    <div class="panel-title-bar">
+                        <div class="title-left">
+                            <i data-lucide="key" class="panel-title-icon"></i>
+                            <h2>Licensing Status</h2>
+                        </div>
+                    </div>
+                    <div class="panel-content license-metrics">
+                        <div class="license-grid">
+                            <div class="lic-box">
+                                <span class="lic-label">TOTAL SEATS</span>
+                                <span class="lic-num font-mono">100</span>
+                            </div>
+                            <div class="lic-box">
+                                <span class="lic-label">ACTIVE RUNNING</span>
+                                <span class="lic-num font-mono text-online" id="licActive">12</span>
+                            </div>
+                            <div class="lic-box">
+                                <span class="lic-label">AVAILABLE</span>
+                                <span class="lic-num font-mono" id="licAvailable">88</span>
+                            </div>
+                        </div>
+                        <div class="lic-util spec-row">
+                            <span class="spec-label">Licensing Utilization</span>
+                            <div class="progress-container">
+                                <div class="progress-bar bar-purple" style="width: 12%"></div>
+                                <span class="progress-label font-mono">12.0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Latency Diagnostics -->
+                <section class="ws-panel latency-panel">
+                    <div class="panel-title-bar">
+                        <div class="title-left">
+                            <i data-lucide="gauge" class="panel-title-icon"></i>
+                            <h2>Ping Diagnostic</h2>
+                        </div>
+                    </div>
+                    <div class="panel-content ping-display">
+                        <div class="ping-header">
+                            <span class="ping-title">Gateway Connection Latency</span>
+                            <span class="ping-current font-mono" id="pingVal">12 ms</span>
+                        </div>
+                        <div class="ping-sparkline" id="pingSparkline">
+                            <!-- Latency status sparkline blocks -->
+                            <span class="spark-bar" style="height: 15px"></span>
+                            <span class="spark-bar" style="height: 12px"></span>
+                            <span class="spark-bar" style="height: 18px"></span>
+                            <span class="spark-bar" style="height: 10px"></span>
+                            <span class="spark-bar" style="height: 14px"></span>
+                            <span class="spark-bar" style="height: 12px"></span>
+                            <span class="spark-bar" style="height: 15px"></span>
+                            <span class="spark-bar active-spark" style="height: 12px" id="activeSpark"></span>
+                        </div>
+                    </div>
+                </section>
+
+            </aside>
+
+        </div>
+
+        <!-- System Logs Console (Bottom Area) -->
+        <section class="ws-panel console-panel">
+            <div class="panel-title-bar console-title-bar">
+                <div class="title-left">
+                    <i data-lucide="terminal" class="panel-title-icon"></i>
+                    <h2>System Diagnostics Console</h2>
+                </div>
+                <div class="console-actions">
+                    <button class="btn-console active-console-filter" id="filterAll">ALL</button>
+                    <button class="btn-console" id="filterInfo">INFO</button>
+                    <button class="btn-console" id="filterErrors">ERRORS</button>
+                    <span class="console-divider">|</span>
+                    <button class="btn-console-action" id="btnClearConsole" title="Clear Console Log">
+                        <i data-lucide="trash-2"></i>
+                        <span>Clear</span>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-content console-log-wrapper">
+                <div class="console-log-box font-mono" id="consoleLogBox">
+                    <!-- Logs dynamically appended via main.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="workstation-footer">
+            <div class="footer-left">
+                <span class="footer-ts font-mono" id="generated_at">Last Updated : --/--/---- --:--:--</span>
+            </div>
+            <div class="footer-right">
+                <span class="copyright">&copy; 2026 Dhruv Shingala. All rights reserved.</span>
             </div>
         </footer>
 
