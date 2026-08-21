@@ -1,33 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadence Status Monitor</title>
-
+    <meta name="description" content="Cadence Status Monitor - Live diagnostics and uptime status for the Cadence laboratory services.">
+    <title>Cadence Status Monitor | Diagnostics</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="container">
+    <!-- Background Elements -->
+    <div class="monitor-background">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
 
-    <header>
-        <h1>Cadence Status Monitor</h1>
-        <p>Current status of Cadence laboratory services</p>
-    </header>
+    <!-- Main Container -->
+    <div class="container">
 
-    <main id="status-container"></main>
+        <header>
+            <div class="header-nav">
+                <a href="https://dhruv7044.github.io/" class="back-link">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Hub Home</span>
+                </a>
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    <span>Live Monitoring</span>
+                </div>
+            </div>
+            
+            <div class="title-area">
+                <div class="monitor-icon-wrapper">
+                    <i data-lucide="activity" class="monitor-icon"></i>
+                </div>
+                <h1>Cadence Status Monitor</h1>
+                <p class="subtitle">Real-time health diagnostic dashboard for Cadence laboratory services</p>
+            </div>
+        </header>
 
-    <footer>
-        <p id="generated_at"></p>
-    </footer>
+        <main>
+            <!-- Services Status Grid -->
+            <section class="monitor-section">
+                <h2>Service Nodes</h2>
+                <div class="underline"></div>
+                <div id="status-container" class="status-grid">
+                    <!-- Loaded dynamically via js/main.js -->
+                    <div class="loading-state">
+                        <i data-lucide="refresh-cw" class="spinner"></i>
+                        <p>Polling node status...</p>
+                    </div>
+                </div>
+            </section>
 
-</div>
+            <!-- Uptime Diagnostic Information (Static Console Elements) -->
+            <section class="diagnostic-panel">
+                <div class="panel-header">
+                    <i data-lucide="terminal" class="panel-icon"></i>
+                    <h3>Diagnostics Log & System Specs</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="metric-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">Network Health</span>
+                            <span class="metric-value text-online">Optimal</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Avg. Latency</span>
+                            <span class="metric-value">12 ms</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Active Users</span>
+                            <span class="metric-value">4 Session(s)</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Lab Server Host</span>
+                            <span class="metric-value">lab-master-1</span>
+                        </div>
+                    </div>
+                    <div class="console-box">
+                        <p class="console-line"><span class="console-time">[00:01:04]</span> System diagnostics initialized.</p>
+                        <p class="console-line"><span class="console-time">[00:01:05]</span> Established SSH tunnels on port 22.</p>
+                        <p class="console-line"><span class="console-time">[00:01:05]</span> Checked Cadence License daemon port 27000... success.</p>
+                        <p class="console-line"><span class="console-time">[00:01:06]</span> Polling Virtuoso application server nodes... all OK.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-<script src="js/main.js"></script>
+        <footer>
+            <div class="footer-content">
+                <p id="generated_at">Last Updated : --/--/---- --:--:--</p>
+                <p class="copyright">&copy; 2026 Dhruv Shingala. All rights reserved.</p>
+            </div>
+        </footer>
 
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="js/main.js"></script>
 </body>
-
 </html>
