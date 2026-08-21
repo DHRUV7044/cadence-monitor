@@ -182,40 +182,6 @@ body {
     color: var(--status-online);
 }
 
-.btn-refresh {
-    background: rgba(0, 210, 255, 0.05);
-    border: 1px solid rgba(0, 210, 255, 0.2);
-    color: var(--accent-cyan);
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    transition: var(--transition-fast);
-}
-
-.btn-refresh:hover {
-    background: rgba(0, 210, 255, 0.1);
-    border-color: var(--accent-cyan);
-}
-
-.btn-refresh i {
-    width: 14px;
-    height: 14px;
-}
-
-.btn-refresh i.spin {
-    animation: spin-anim 0.8s infinite linear;
-}
-
-@keyframes spin-anim {
-    to { transform: rotate(360deg); }
-}
-
 /* --- Main Status Grid --- */
 .status-grid {
     display: grid;

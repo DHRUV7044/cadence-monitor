@@ -87,20 +87,6 @@ async function loadStatus() {
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
-    const btnRefresh = document.getElementById('btnRefresh');
-    const refreshIcon = document.getElementById('refreshIcon');
-    
-    if (btnRefresh && refreshIcon) {
-        btnRefresh.addEventListener('click', () => {
-            refreshIcon.classList.add('spin');
-            loadStatus().then(() => {
-                setTimeout(() => {
-                    refreshIcon.classList.remove('spin');
-                }, 600);
-            });
-        });
-    }
-
     // Initial fetch
     loadStatus();
 });
