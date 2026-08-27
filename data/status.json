@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-27T15:01:10+05:30",
+  "generated_at": "2026-08-27T15:31:09+05:30",
   "monitor": {
     "name": "Cadence Status Monitor",
     "host": "Lab Monitor"
@@ -11,7 +11,7 @@
       "name": "Virtuoso",
       "status": "online",
       "message": "Virtuoso software started",
-      "last_success": "2026-08-27T15:01:10+05:30"
+      "last_success": "2026-08-27T15:31:09+05:30"
     },
     {
       "id": "license",
